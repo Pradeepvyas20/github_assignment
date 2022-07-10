@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "417e6572-b385-4909-a848-2ee00af11a1d",
+		"name": "Google map",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ADD Location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9bce4309-8b2f-4b46-8975-e83126fc3be9",
+						"exec": [
+							"const placeid=pm.response.json().place_id;\r",
+							"pm.environment.set(\"placeid\",placeid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "b7dfc3b0-6b6b-4427-a1f4-9edd901b80c8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{placeid}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"location\":{\r\n \r\n        \"lat\" : \"-38.383494\",\r\n \r\n        \"lng\" : \"33.427362\"\r\n \r\n    },\r\n \r\n    \"accuracy\":\"50\",\r\n \r\n    \"name\":\"Frontline house\",\r\n \r\n    \"phone_number\":\"(+91) 983 893 3937\",\r\n \r\n    \"address\" : \"29, side layout, cohen 09\",\r\n \r\n    \"types\": [\"shoe park\",\"shop\"],\r\n \r\n    \"website\" : \"http://google.com\",\r\n \r\n    \"language\" : \"French-IN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{Base url}}/maps/api/place/add/json?key={{Key}}",
+					"protocol": "http",
+					"host": [
+						"{{Base url}}"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"add",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{Key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Location",
+			"_postman_id": "c33eeeab-674f-4f80-9808-c84b7277d7c7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{placeid}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"place_id\":\"{{placeid}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{Base url}}/maps/api/place/delete/json?key={{Key}}",
+					"protocol": "http",
+					"host": [
+						"{{Base url}}"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"delete",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{Key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
